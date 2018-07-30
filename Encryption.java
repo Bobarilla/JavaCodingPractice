@@ -18,14 +18,15 @@ public class Encryption {
 		
 		clearFile("./txt/encrypted.txt");
 		clearFile("./txt/decrypted.txt");
-		
+		System.out.println("\n./txt/unencrypted.txt");
+		Tools.PrintFile("./txt/unencrypted.txt");
 		while (true) {
 			try {
-				msg = readMsgLn("./txt/messages.txt", ln1);
+				msg = readMsgLn("./txt/unencrypted.txt", ln1);
 			} catch (java.util.NoSuchElementException e) {
 				break;
 			}
-			key = readMsgLn("./txt/messages.txt", ln2);
+			key = readMsgLn("./txt/unencrypted.txt", ln2);
 			keyMsg = new char[msg.length];
 			//System.out.println(keyMsg.length);
 			//System.out.println(key.length);
@@ -46,24 +47,28 @@ public class Encryption {
 				enc.write(c);
 			}
 			enc.write("\n");
-			enc.flush();
 			ln1+=2;
 			ln2+=2;
 		}
+		enc.flush();//no idea what this does...
 		enc.close();
 		ln1=0;
 		ln2=0;
-		//while (true) {
+		System.out.println("\n./txt/encrypted.txt");
+		Tools.PrintFile("./txt/encrypted.txt");
+		while (true) {
 			try {
 				encr = readMsgLn("./txt/encrypted.txt", ln1);
 			} catch (java.util.NoSuchElementException e) {
 				break;
 			}
 			key = readMsgLn("./txt/encrypted.txt", ln2);
-			
+			msg = decrypt(encr, key);
+
 			ln1+=2;
 			ln2+=2;
-		//}
+		}
+		dec.flush();
 		dec.close();
 	}
 	static char[] readMsgLn(String filePath, int lnNum) throws IOException {
@@ -96,6 +101,12 @@ public class Encryption {
 	}
 
 	static char[] decrypt(char[] encr, char[] key) {
+		char[] alf = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
+		//rule of three
+		// encrencrencr
+		//-keymsg0msg1msg2
+		//----------------
+		// msg0msg1msg2msg3
 		return encr;
 	}
 	static void clearFile(String filePath) throws IOException {

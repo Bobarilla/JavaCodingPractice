@@ -95,3 +95,4 @@ public class CountingStarsRecursive
             System.out.println();
         }
     }
+}

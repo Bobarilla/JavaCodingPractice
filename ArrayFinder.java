@@ -16,9 +16,9 @@ public class ArrayFinder
          * https://www.geeksforgeeks.org/insertion-sort/
          */
         Scanner sc = new Scanner(System.in);
-        Scanner fr = new Scanner(new FileReader("./txt/ArrayData.txt"));
+        Scanner fr = new Scanner(new FileReader("./txt/arrayData.txt"));
         DecimalFormat df = new DecimalFormat("");//TBD
-        PrintWriter pw = new PrintWriter("./txt/ArrayData.txt");
+        PrintWriter pw = new PrintWriter("./txt/arrayData.txt");
         //int[] array = {0,4,3,6,8,2,1,9,5,7};
         System.out.print("How many numbers should be generated?\t");
         int n, temp, temp2;
