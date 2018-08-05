@@ -8,14 +8,6 @@ import java.util.Scanner;
  */
 public class helloworld {
 	public static void main(String[] args) throws IOException {
-		FileWriter fw = new FileWriter("./txt/helloworld.txt", true);
-		System.out.println("Hello World!");
-		char[] ch = {'a','b','c','d','e','f','g'};//7
-		for (char c : ch) {
-			System.out.println(c);
-			fw.write(c);
-		}
-		fw.flush();
-		fw.close();
+		System.out.println(1%3);
 	}
 }

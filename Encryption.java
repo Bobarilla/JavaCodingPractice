@@ -71,6 +71,7 @@ public class Encryption {
 		dec.flush();
 		dec.close();
 	}
+	
 	static char[] readMsgLn(String filePath, int lnNum) throws IOException {
 		//Read a line as char[]
 		Scanner read = new Scanner(new FileReader(filePath));
@@ -102,31 +103,27 @@ public class Encryption {
 
 	static char[] decrypt(char[] encr, char[] key) {
 		char[] alf = {'A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z','A','B','C','D','E','F','G','H','I','J','K','L','M','N','O','P','Q','R','S','T','U','V','W','X','Y','Z'};
-		//rule of three
+		// 3
 		// encrencrencr
 		//-keymsg0msg1msg2
 		//----------------
 		// msg0msg1msg2msg3
+		// not mult of 3: remander of: 1 or 2
+		int e, km, m, r=encr.length%3;
+		for (int i=0; i<encr.length; i++) {
+			e=encr[i]-65;
+			km=key[i]-65;
+			encr[i]=alf[e-km];
+			if ((i+1)%3==0) {
+				for (int j=0; j<3; j++) { //i-3??
+					key[j]=encr[i];
+				}
+			}
+		}
 		return encr;
 	}
+
 	static void clearFile(String filePath) throws IOException {
 		FileWriter justCreatedToClearFile = new FileWriter(filePath);
 	}
 }
-/*
-A 65
--65 -> A 0
-hi there
-1 one
-2 two
-3 three
-4 four
-5 five 
-6 six
-7 seven
-8 eight
-9 nine
-10 ten
-SGZVQBUQAFRWSLC
-ACM
-*/
