@@ -45,8 +45,8 @@ public class Encryption {
 		}
 		enc.flush();//no idea what this does...
 		enc.close();
-		ln1=0;
-		ln2=0;
+		ln1=1;
+		ln2=2;
 		System.out.println("\n./txt/encrypted.txt");
 		Tools.PrintFile("./txt/encrypted.txt");
 		while (true) {
@@ -110,17 +110,21 @@ public class Encryption {
 		int e, km, m, r=encr.length%3;
 		for (int i=0; i<encr.length; i++) {
 			e=(int) encr[i]; //get encr[i] ASCII Decimal Value from 65-90
-			km=(int) key[i]-65; //get shift from 0-25
+			//System.out.println("e: "+e+" "+encr[i]);
+			km=(int) key[i%3]-65; //get shift from 0-25 //key[cycle 0, 1, 2]
+			//System.out.println("km: "+km);
 			if (e-km<65) {
-				encr[i]=(char) (25+e-km);//(90-(65-(e-km))) = (25+e-km)
+				encr[i]=(char) (26+e-km);//(90-(65-(e-km))) = (26+e-km)
 			}
-			encr[i]=(char) (e-km);
-			if ((i+1)%3==0) {
-				for (int j=0; j<3; j++) { //i-3??
-					//i-=2;
-					key[j]=encr[i];
-					//i+=2;
+			else {
+				encr[i]=(char) (e-km);
+			}
+			if ((i+1)%3==0) { // changes on end of every third
+				for (int j=0; j<3; j++) { //gets last three values
+					key[j]=encr[(i-2+j)]; // sets as key
+					//System.out.print(key[j]);
 				}
+				//System.out.println();
 			}
 		}
 		return encr;
